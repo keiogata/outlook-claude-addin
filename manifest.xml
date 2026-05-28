@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+  xsi:type="MailApp">
+
+  <!-- アドインの一意識別子（GUIDを変更する必要あり） -->
+  <Id>2eef7194-afdd-4726-9f02-97568a307f98</Id>
+  <Version>1.0.0</Version>
+  <ProviderName>Honda CHG制御チーム</ProviderName>
+  <DefaultLocale>ja-JP</DefaultLocale>
+
+  <DisplayName DefaultValue="Claude AI アシスタント"/>
+  <Description DefaultValue="ClaudeでOutlookのメール・予定表・Teamsを賢く検索・操作する"/>
+
+  <!-- アイコン設定 -->
+  <IconUrl DefaultValue="https://keiogata.github.io/outlook-claude-addin/assets/icon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://keiogata.github.io/outlook-claude-addin/assets/icon-128.png"/>
+
+  <!-- サポートURL -->
+  <SupportUrl DefaultValue="https://github.com/keiogata/outlook-claude-addin"/>
+
+  <!-- Outlookメールボックス対応 -->
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+
+  <!-- 必要な権限 -->
+  <Permissions>ReadWriteMailbox</Permissions>
+
+  <!-- メール閲覧ルール（常に表示） -->
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit"/>
+    <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Read"/>
+    <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit"/>
+  </Rule>
+
+  <!-- デスクトップ設定 -->
+  <DesktopSettings>
+    <!-- GitHub PagesのURLに変更すること -->
+    <SourceLocation DefaultValue="https://keiogata.github.io/outlook-claude-addin/taskpane.html"/>
+    <RequestedHeight>550</RequestedHeight>
+  </DesktopSettings>
+
+  <!-- バージョンオーバーライド（リボンボタン追加） -->
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets>
+        <bt:Set Name="Mailbox" MinVersion="1.1"/>
+      </bt:Sets>
+    </Requirements>
+
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+          <!-- リボンに「Claude AI」ボタンを追加 -->
+          <ExtensionPoint xsi:type="MessageReadCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="msgReadGroup">
+                <Label resid="groupLabel"/>
+                <Control xsi:type="Button" id="msgReadOpenPaneButton">
+                  <Label resid="paneButtonLabel"/>
+                  <Supertip>
+                    <Title resid="paneButtonLabel"/>
+                    <Description resid="paneButtonDesc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="icon16"/>
+                    <bt:Image size="32" resid="icon32"/>
+                    <bt:Image size="80" resid="icon80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="paneUrl"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Images>
+        <bt:Image id="icon16" DefaultValue="https://keiogata.github.io/outlook-claude-addin/assets/icon-16.png"/>
+        <bt:Image id="icon32" DefaultValue="https://keiogata.github.io/outlook-claude-addin/assets/icon-32.png"/>
+        <bt:Image id="icon80" DefaultValue="https://keiogata.github.io/outlook-claude-addin/assets/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="paneUrl" DefaultValue="https://keiogata.github.io/outlook-claude-addin/taskpane.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="groupLabel" DefaultValue="Claude AI"/>
+        <bt:String id="paneButtonLabel" DefaultValue="Claude AI"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="paneButtonDesc" DefaultValue="Claude AIアシスタントを開いてメール・予定表を検索・操作する"/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>

@@ -1,0 +1,482 @@
+/* Outlook Claude AIアシスタント スタイルシート
+   Microsoftの Fluent UI デザインシステムに準拠した配色
+   フォント: Segoe UI（Windowsデフォルト）
+*/
+
+/* ===== リセット & 基本設定 ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  color: #323130;
+  background-color: #f3f2f1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ===== ヘッダー ===== */
+#header {
+  background-color: #0078d4; /* Microsoftブルー */
+  color: white;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+#header h1 {
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#header .header-icon {
+  font-size: 18px;
+}
+
+#settings-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background-color 0.15s;
+}
+
+#settings-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== メインコンテンツ ===== */
+#main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ===== 設定パネル ===== */
+#settings-panel {
+  background-color: #ffffff;
+  border-bottom: 1px solid #edebe9;
+  padding: 12px 14px;
+  display: none; /* 初期は非表示 */
+}
+
+#settings-panel.visible {
+  display: block;
+}
+
+#settings-panel h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #323130;
+  margin-bottom: 8px;
+}
+
+#settings-panel label {
+  display: block;
+  font-size: 12px;
+  color: #605e5c;
+  margin-bottom: 4px;
+}
+
+#api-key-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #8a8886;
+  border-radius: 2px;
+  font-size: 13px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #323130;
+  transition: border-color 0.15s;
+}
+
+#api-key-input:focus {
+  outline: none;
+  border-color: #0078d4;
+  box-shadow: 0 0 0 1px #0078d4;
+}
+
+.settings-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn-primary {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 2px;
+  font-size: 13px;
+  font-family: 'Segoe UI', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.btn-primary:hover {
+  background-color: #106ebe;
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: #323130;
+  border: 1px solid #8a8886;
+  padding: 6px 12px;
+  border-radius: 2px;
+  font-size: 13px;
+  font-family: 'Segoe UI', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.btn-secondary:hover {
+  background-color: #f3f2f1;
+}
+
+/* APIキー保存成功メッセージ */
+#settings-saved-msg {
+  font-size: 12px;
+  color: #107c10; /* Microsoftグリーン */
+  margin-top: 6px;
+  display: none;
+}
+
+/* ===== 会話履歴エリア ===== */
+#chat-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f3f2f1;
+}
+
+/* スクロールバーのスタイル */
+#chat-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+#chat-container::-webkit-scrollbar-track {
+  background: #f3f2f1;
+}
+
+#chat-container::-webkit-scrollbar-thumb {
+  background: #c8c6c4;
+  border-radius: 3px;
+}
+
+#chat-container::-webkit-scrollbar-thumb:hover {
+  background: #a19f9d;
+}
+
+/* ===== ウェルカムメッセージ ===== */
+#welcome-msg {
+  text-align: center;
+  padding: 20px 10px;
+  color: #605e5c;
+}
+
+#welcome-msg .welcome-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+#welcome-msg h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #323130;
+  margin-bottom: 6px;
+}
+
+#welcome-msg p {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+#welcome-msg .example-queries {
+  margin-top: 10px;
+  text-align: left;
+}
+
+#welcome-msg .example-queries p {
+  font-size: 12px;
+  color: #0078d4;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 2px;
+  border: 1px solid #deecf9;
+  background-color: #deecf9;
+  margin-bottom: 4px;
+  transition: background-color 0.15s;
+}
+
+#welcome-msg .example-queries p:hover {
+  background-color: #c7e0f4;
+}
+
+/* ===== チャットメッセージ ===== */
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 92%;
+  animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ユーザーメッセージ（右寄せ） */
+.message.user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+/* AIメッセージ（左寄せ） */
+.message.assistant {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.message-label {
+  font-size: 11px;
+  color: #605e5c;
+  margin-bottom: 3px;
+}
+
+.message-bubble {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* ユーザーバブル：青背景 */
+.message.user .message-bubble {
+  background-color: #0078d4;
+  color: white;
+  border-radius: 8px 8px 2px 8px;
+}
+
+/* AIバブル：白背景 */
+.message.assistant .message-bubble {
+  background-color: #ffffff;
+  color: #323130;
+  border-radius: 8px 8px 8px 2px;
+  border: 1px solid #edebe9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* AIバブル内のコードブロック */
+.message.assistant .message-bubble code {
+  background-color: #f3f2f1;
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-family: 'Cascadia Code', 'Consolas', monospace;
+  font-size: 12px;
+}
+
+.message.assistant .message-bubble pre {
+  background-color: #f3f2f1;
+  padding: 8px;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 6px 0;
+}
+
+.message.assistant .message-bubble pre code {
+  background: none;
+  padding: 0;
+}
+
+/* エラーメッセージ */
+.message.error .message-bubble {
+  background-color: #fde7e9;
+  color: #a4262c;
+  border: 1px solid #f1707b;
+}
+
+/* ===== ローディングインジケーター ===== */
+#loading {
+  display: none;
+  align-self: flex-start;
+  padding: 8px 12px;
+  background-color: #ffffff;
+  border: 1px solid #edebe9;
+  border-radius: 8px 8px 8px 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+#loading.visible {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.loading-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.loading-dots span {
+  width: 6px;
+  height: 6px;
+  background-color: #0078d4;
+  border-radius: 50%;
+  animation: bounce 1.2s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.6; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.loading-text {
+  font-size: 12px;
+  color: #605e5c;
+}
+
+/* ===== リトライボタン ===== */
+.retry-btn {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 2px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background-color 0.15s;
+}
+
+.retry-btn:hover {
+  background-color: #106ebe;
+}
+
+/* ===== 入力エリア ===== */
+#input-area {
+  background-color: #ffffff;
+  border-top: 1px solid #edebe9;
+  padding: 10px 14px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+#message-input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #8a8886;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #323130;
+  resize: none;
+  min-height: 36px;
+  max-height: 120px;
+  overflow-y: auto;
+  line-height: 1.4;
+  transition: border-color 0.15s;
+}
+
+#message-input:focus {
+  outline: none;
+  border-color: #0078d4;
+  box-shadow: 0 0 0 1px #0078d4;
+}
+
+#message-input::placeholder {
+  color: #a19f9d;
+}
+
+#send-btn {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s;
+  flex-shrink: 0;
+}
+
+#send-btn:hover {
+  background-color: #106ebe;
+}
+
+#send-btn:disabled {
+  background-color: #c8c6c4;
+  cursor: not-allowed;
+}
+
+/* ===== APIキー未設定の警告バー ===== */
+#api-key-warning {
+  background-color: #fff4ce;
+  border-bottom: 1px solid #f9e89a;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: #7d5f00;
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+
+#api-key-warning.visible {
+  display: flex;
+}
+
+#api-key-warning a {
+  color: #0078d4;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* ===== 会話クリアボタン ===== */
+#clear-btn {
+  background: transparent;
+  border: none;
+  color: #605e5c;
+  cursor: pointer;
+  font-size: 11px;
+  padding: 4px 6px;
+  text-decoration: underline;
+  flex-shrink: 0;
+}
+
+#clear-btn:hover {
+  color: #323130;
+}

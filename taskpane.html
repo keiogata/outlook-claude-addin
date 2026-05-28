@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude AI アシスタント</title>
+
+  <!-- Fluent UI（Microsoft Office UI Fabric） -->
+  <link rel="stylesheet"
+    href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.1.0/css/fabric.min.css" />
+
+  <!-- Office.js（Outlookアドイン必須） -->
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+
+  <!-- スタイルシート -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- ===== ヘッダー ===== -->
+  <div id="header">
+    <h1>
+      <span class="header-icon">🤖</span>
+      Claude AI アシスタント
+    </h1>
+    <button id="settings-btn" title="設定（APIキー）">⚙️</button>
+  </div>
+
+  <!-- ===== メインコンテンツ ===== -->
+  <div id="main">
+
+    <!-- APIキー未設定の警告バー -->
+    <div id="api-key-warning">
+      ⚠️ APIキーが未設定です。
+      <a id="api-key-warning-link">こちらで設定してください</a>
+    </div>
+
+    <!-- 設定パネル（初期は非表示） -->
+    <div id="settings-panel">
+      <h2>⚙️ 設定</h2>
+      <label for="api-key-input">Anthropic APIキー</label>
+      <input
+        type="password"
+        id="api-key-input"
+        placeholder="sk-ant-..." />
+      <div class="settings-buttons">
+        <button id="save-api-key-btn" class="btn-primary">保存</button>
+        <button id="cancel-settings-btn" class="btn-secondary">キャンセル</button>
+      </div>
+      <p id="settings-saved-msg">✅ 保存しました</p>
+      <p style="font-size:11px; color:#605e5c; margin-top:8px;">
+        ※ APIキーはブラウザのlocalStorageに保存されます。<br>
+        　個人利用・ローカル環境での使用を前提としています。
+      </p>
+    </div>
+
+    <!-- 会話履歴エリア -->
+    <div id="chat-container">
+      <!-- ウェルカムメッセージはJS側で動的生成 -->
+
+      <!-- ローディングインジケーター -->
+      <div id="loading">
+        <div class="loading-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <span class="loading-text">考え中...</span>
+      </div>
+    </div>
+
+    <!-- 入力エリア -->
+    <div id="input-area">
+      <button id="clear-btn" title="会話をリセット">🗑 クリア</button>
+      <textarea
+        id="message-input"
+        placeholder="質問を入力... (Enter送信 / Shift+Enter改行)"
+        rows="1"
+        maxlength="2000">
+      </textarea>
+      <button id="send-btn" title="送信 (Enter)">
+        ➤
+      </button>
+    </div>
+
+  </div><!-- /#main -->
+
+  <!-- アドインロジック（依存関係順に読み込み） -->
+  <script src="claude.js"></script>
+  <script src="auth.js"></script>
+  <script src="graph.js"></script>
+  <script src="taskpane.js"></script>
+</body>
+</html>
